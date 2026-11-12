@@ -1,0 +1,10 @@
+{
+  "name": "load_control",
+  "comment": "Fuel valve tracks the operator load setpoint with proportional feedback.",
+  "instructions": [
+    {"op":"read", "source":"gas_load", "as":"load"},
+    {"op":"read", "source":"load_setpoint", "as":"setpoint"},
+    {"op":"proportional", "setpoint":"setpoint", "input":"load", "base_scale":0.1666666667, "gain":0.1, "as":"valve"},
+    {"op":"set_output", "target":"fuel_valve", "value":"valve"}
+  ]
+}

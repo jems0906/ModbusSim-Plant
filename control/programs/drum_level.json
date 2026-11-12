@@ -1,0 +1,11 @@
+{
+  "name": "drum_level",
+  "comment": "Single-element feedback with steam-flow feedforward; valve output is clamped to 0-100%.",
+  "instructions": [
+    {"op":"read", "source":"drum_level", "as":"level"},
+    {"op":"read", "source":"level_setpoint", "as":"setpoint"},
+    {"op":"read", "source":"steam_flow", "as":"feedforward"},
+    {"op":"proportional", "setpoint":"setpoint", "input":"level", "base":"feedforward", "gain":2.5, "as":"valve"},
+    {"op":"set_output", "target":"feedwater_valve", "value":"valve"}
+  ]
+}

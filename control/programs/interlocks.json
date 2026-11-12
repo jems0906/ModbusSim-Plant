@@ -1,0 +1,12 @@
+{
+  "name": "interlocks",
+  "comment": "Latch immediately at or below 20%. Reset requires a request and recovery above 25%.",
+  "instructions": [
+    {"op":"read", "source":"drum_level", "as":"level"},
+    {"op":"compare", "left":"level", "operator":"<=", "right":20, "as":"low_low"},
+    {"op":"latch", "condition":"low_low", "target":"low_low_alarm"},
+    {"op":"compare", "left":"level", "operator":">", "right":25, "as":"recovered"},
+    {"op":"reset", "condition":"recovered", "request":"reset_trip", "target":"low_low_alarm"},
+    {"op":"interlock_outputs", "condition":"low_low_alarm"}
+  ]
+}

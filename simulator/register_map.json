@@ -1,0 +1,33 @@
+{
+  "version": "1.0.1",
+  "points": [
+    {"name":"gas_load","table":"holding","address":40001,"scale":10,"unit":"MW","access":"read","description":"Gas turbine load"},
+    {"name":"exhaust_temp","table":"holding","address":40002,"scale":10,"unit":"deg C","access":"read","description":"Gas turbine exhaust temperature"},
+    {"name":"fuel_valve","table":"holding","address":40003,"scale":10,"unit":"%","access":"read","description":"Fuel valve position; proxy for fuel flow"},
+    {"name":"rpm","table":"holding","address":40004,"scale":1,"unit":"rpm","access":"read","description":"Gas turbine rotor speed"},
+    {"name":"load_setpoint","table":"holding","address":40005,"scale":10,"unit":"MW","access":"write","description":"Gas turbine load setpoint"},
+    {"name":"level_setpoint_batch","target":"level_setpoint","table":"holding","address":40006,"scale":10,"unit":"%","access":"write","description":"Drum level setpoint alias for atomic FC16 writes"},
+    {"name":"fuel_flow","table":"holding","address":40007,"scale":10,"unit":"kg/s","access":"read","description":"Simplified gas turbine fuel flow derived from fuel valve demand"},
+    {"name":"drum_level","table":"holding","address":40051,"scale":10,"unit":"%","access":"read","description":"HRSG drum level"},
+    {"name":"steam_pressure","table":"holding","address":40052,"scale":10,"unit":"bar","access":"read","description":"HRSG steam pressure"},
+    {"name":"steam_temp","table":"holding","address":40053,"scale":10,"unit":"deg C","access":"read","description":"HRSG steam temperature"},
+    {"name":"feedwater_flow","table":"holding","address":40054,"scale":10,"unit":"%","access":"read","description":"Feedwater flow, normalized"},
+    {"name":"level_setpoint","table":"holding","address":40055,"scale":10,"unit":"%","access":"write","description":"Drum level setpoint"},
+    {"name":"feedwater_valve","table":"holding","address":40056,"scale":10,"unit":"%","access":"read","description":"Feedwater valve position"},
+    {"name":"steam_flow","table":"holding","address":40057,"scale":10,"unit":"%","access":"read","description":"Steam flow, normalized"},
+    {"name":"steam_inlet_pressure","table":"holding","address":40101,"scale":10,"unit":"bar","access":"read","description":"Steam turbine inlet pressure"},
+    {"name":"steam_load","table":"holding","address":40102,"scale":10,"unit":"MW","access":"read","description":"Steam turbine load"},
+    {"name":"extraction_pressure","table":"holding","address":40103,"scale":10,"unit":"bar","access":"read","description":"Steam turbine extraction pressure"},
+    {"name":"generator_mw","table":"holding","address":40151,"scale":10,"unit":"MW","access":"read","description":"Generator active power"},
+    {"name":"mvar","table":"holding","address":40152,"scale":10,"unit":"MVAR","access":"read","description":"Generator reactive power"},
+    {"name":"frequency","table":"holding","address":40153,"scale":100,"unit":"Hz","access":"read","description":"Generator frequency"},
+    {"name":"breaker_closed","table":"holding","address":40154,"scale":1,"unit":"bool","access":"read","description":"Generator breaker closed"},
+    {"name":"pump_running","table":"coil","address":10001,"scale":1,"unit":"bool","access":"read","description":"Feedwater pump running"},
+    {"name":"bypass_open","table":"coil","address":10002,"scale":1,"unit":"bool","access":"read","description":"Feedwater bypass open"},
+    {"name":"low_low_alarm","table":"coil","address":10003,"scale":1,"unit":"bool","access":"read","description":"Latched drum low-low trip"},
+    {"name":"reset_trip","table":"coil","address":10010,"scale":1,"unit":"bool","access":"write","description":"Pulse true to request trip reset"},
+    {"name":"exhaust_sensor","table":"input","address":30001,"scale":10,"unit":"deg C","access":"read","description":"Exhaust temperature transmitter"},
+    {"name":"level_sensor","table":"input","address":30002,"scale":10,"unit":"%","access":"read","description":"Drum level transmitter"},
+    {"name":"pressure_sensor","table":"input","address":30003,"scale":10,"unit":"bar","access":"read","description":"Steam pressure transmitter"}
+  ]
+}

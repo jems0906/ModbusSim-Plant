@@ -1,0 +1,12 @@
+{
+  "version": "1.0.0",
+  "rules": [
+    {"id":"ALM-001","tag":"drum_level","label":"HRSG drum level low","area":"HRSG","priority":"HIGH","unit":"%","condition":"lt","limit":30,"clear_condition":"gte","clear_limit":32,"delay_seconds":3},
+    {"id":"ALM-002","tag":"low_low_alarm","label":"HRSG drum low-low trip indication","area":"HRSG","priority":"CRITICAL","unit":"state","condition":"is_true","delay_seconds":0},
+    {"id":"ALM-003","tag":"exhaust_temp","label":"Gas turbine exhaust temperature high","area":"GAS TURBINE","priority":"HIGH","unit":"deg C","condition":"gt","limit":570,"clear_condition":"lt","clear_limit":560,"delay_seconds":5},
+    {"id":"ALM-004","tag":"steam_pressure","label":"HRSG steam pressure high","area":"HRSG","priority":"MEDIUM","unit":"bar","condition":"gt","limit":160,"clear_condition":"lt","clear_limit":155,"delay_seconds":5},
+    {"id":"ALM-005","tag":"gas_load","label":"Gas turbine load deviates from setpoint","area":"GENERATION","priority":"MEDIUM","unit":"MW deviation","condition":"deviation_gt","reference":"load_setpoint","limit":40,"clear_condition":"deviation_lt","clear_reference":"load_setpoint","clear_limit":30,"delay_seconds":10},
+    {"id":"ALM-006","tag":"breaker_closed","label":"Generator breaker open","area":"GENERATOR","priority":"HIGH","unit":"state","condition":"is_false","delay_seconds":0},
+    {"id":"SYS-001","tag":"modbus_connected","label":"Modbus data source unavailable","area":"COMMUNICATIONS","priority":"HIGH","unit":"state","condition":"is_false","delay_seconds":3}
+  ]
+}
