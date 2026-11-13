@@ -37,13 +37,13 @@ server {
     }
 
     location /plant-api/ {
-        rewrite ^/plant-api/(.*)$ /api/$1 break;
+        rewrite ^/plant-api/(.*)$ /$1 break;
         proxy_pass http://127.0.0.1:8000;
         proxy_set_header Host $host;
     }
 
     location /alarm-api/ {
-        rewrite ^/alarm-api/(.*)$ /api/$1 break;
+        rewrite ^/alarm-api/(.*)$ /$1 break;
         proxy_pass http://127.0.0.1:8001;
         proxy_set_header Host $host;
     }
