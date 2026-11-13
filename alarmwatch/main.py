@@ -19,6 +19,7 @@ EVENT_PATH = Path(os.getenv("ALARMAWATCH_EVENT_LOG", "logs/alarmwatch-events.jso
 SCAN_SECONDS = max(0.5, float(os.getenv("ALARMAWATCH_SCAN_SECONDS", "1")))
 AUDIT_API_URL = os.getenv("ALARMAWATCH_AUDIT_API_URL", "http://127.0.0.1:8000").rstrip("/")
 AUDIT_SCAN_SECONDS = max(1.0, float(os.getenv("ALARMAWATCH_AUDIT_SCAN_SECONDS", "2")))
+RAILWAY_READ_ONLY_DEMO = bool(os.getenv("RAILWAY_ENVIRONMENT")) or os.getenv("RAILWAY_READ_ONLY_DEMO", "").lower() in {"1", "true", "yes"}
 
 
 def append_event(event):
@@ -128,6 +129,8 @@ async def security_events(limit: int = 100):
 
 @app.post("/api/alarms/{alarm_id}/ack")
 async def acknowledge(alarm_id: str, body: AcknowledgeRequest):
+    if RAILWAY_READ_ONLY_DEMO:
+        raise HTTPException(403, "This hosted training demo is read-only")
     actor = body.actor.strip()
     if not actor or not re.fullmatch(r"[A-Za-z0-9_.@ -]+", actor):
         raise HTTPException(422, "actor must use letters, numbers, spaces, dot, underscore, @ or hyphen")

@@ -8,6 +8,8 @@ For a complete alarm trigger, acknowledgment, and return-to-normal walkthrough, 
 
 See the [portfolio evidence page](docs/portfolio_evidence.md) for screenshots, clean-install results, and test evidence.
 
+For a read-only public portfolio deployment, see the [Railway deployment guide](docs/railway_deployment.md).
+
 ## Run
 
 Requires Python 3.10+ and Node.js 20+. From the workspace root:

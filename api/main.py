@@ -16,6 +16,7 @@ plant = PlantModel()
 engine = ControlEngine(plant)
 MODBUS_HOST = os.getenv("MODBUS_HOST", "127.0.0.1")
 MODBUS_PORT = int(os.getenv("MODBUS_PORT", str(DEFAULT_MODBUS_PORT)))
+RAILWAY_READ_ONLY_DEMO = bool(os.getenv("RAILWAY_ENVIRONMENT")) or os.getenv("RAILWAY_READ_ONLY_DEMO", "").lower() in {"1", "true", "yes"}
 proxy = HmiProxy(MODBUS_HOST, MODBUS_PORT)
 audit_log = ModbusAuditLog(os.getenv("MODBUS_AUDIT_LOG", "logs/modbus-audit.jsonl"))
 
@@ -69,6 +70,8 @@ async def audit(limit: int = 100, kind: str = "all"):
 
 @app.post("/api/setpoints/{name}")
 async def setpoint(name: str, body: Setpoint):
+    if RAILWAY_READ_ONLY_DEMO:
+        raise HTTPException(403, "This hosted training demo is read-only")
     if name not in ("level_setpoint", "load_setpoint"):
         raise HTTPException(404, "Unknown setpoint")
     try:
@@ -85,12 +88,16 @@ async def setpoint(name: str, body: Setpoint):
 
 @app.post("/api/trip/reset")
 async def reset_trip():
+    if RAILWAY_READ_ONLY_DEMO:
+        raise HTTPException(403, "This hosted training demo is read-only")
     await proxy.write_point("reset_trip", True)
     return {"accepted": True}
 
 
 @app.post("/api/mode/{mode}")
 async def set_mode(mode: str):
+    if RAILWAY_READ_ONLY_DEMO:
+        raise HTTPException(403, "This hosted training demo is read-only")
     if mode not in ("startup", "steady", "shutdown"):
         raise HTTPException(422, "Unknown mode")
     plant.mode = mode

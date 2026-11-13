@@ -27,3 +27,9 @@ class ApiTests(unittest.TestCase):
                 plant.step()
             self.assertGreater(plant.gas_load, before + 30)
             self.assertEqual(client.post("/api/setpoints/load_setpoint", json={"value": 1000}).status_code, 422)
+
+    def test_railway_read_only_demo_blocks_process_writes(self):
+        with patch("api.main.RAILWAY_READ_ONLY_DEMO", True), TestClient(app) as client:
+            self.assertEqual(client.post("/api/setpoints/load_setpoint", json={"value": 400}).status_code, 403)
+            self.assertEqual(client.post("/api/trip/reset").status_code, 403)
+            self.assertEqual(client.post("/api/mode/shutdown").status_code, 403)

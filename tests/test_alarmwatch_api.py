@@ -43,6 +43,17 @@ class AlarmApiTests(unittest.TestCase):
                 self.assertEqual(findings[0]["rule_id"], "SEC-001")
                 self.assertEqual(client.get("/api/security/events?limit=0").status_code, 422)
 
+    def test_railway_read_only_demo_blocks_acknowledgment(self):
+        async def idle_poller():
+            await asyncio.Event().wait()
+
+        with patch("alarmwatch.main.RAILWAY_READ_ONLY_DEMO", True), \
+             patch("alarmwatch.main.polling_loop", idle_poller), \
+             patch("alarmwatch.main.security_polling_loop", idle_poller), \
+             TestClient(app) as client:
+            response = client.post("/api/alarms/ALM-002/ack", json={"actor": "reviewer"})
+            self.assertEqual(response.status_code, 403)
+
 
 if __name__ == "__main__":
     unittest.main()
