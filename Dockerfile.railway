@@ -33,7 +33,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY simulator/ ./simulator/
 COPY control/ ./control/
 COPY api/ ./api/
-COPY alarmwatch/__init__.py alarmwatch/collector.py alarmwatch/engine.py alarmwatch/main.py alarmwatch/rules.json alarmwatch/security.py ./alarmwatch/
+COPY alarmwatch/collector.py alarmwatch/engine.py alarmwatch/main.py alarmwatch/rules.json alarmwatch/security.py ./alarmwatch/
 COPY --from=plant-ui /src/frontend/dist/ /usr/share/nginx/html/
 COPY --from=alarm-ui /src/alarmwatch/frontend/dist/ /usr/share/nginx/html/alarmwatch/
 COPY deployment/railway-nginx.conf.template /etc/nginx/railway-nginx.conf.template
