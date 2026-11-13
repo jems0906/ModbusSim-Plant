@@ -29,7 +29,11 @@ class ApiTests(unittest.TestCase):
             self.assertEqual(client.post("/api/setpoints/load_setpoint", json={"value": 1000}).status_code, 422)
 
     def test_railway_read_only_demo_blocks_process_writes(self):
-        with patch("api.main.RAILWAY_READ_ONLY_DEMO", True), TestClient(app) as client:
+        with socket.socket() as listener:
+            listener.bind(("127.0.0.1", 0))
+            port = listener.getsockname()[1]
+        with patch("api.main.MODBUS_PORT", port), patch("api.main.proxy", HmiProxy(port=port)), \
+             patch("api.main.RAILWAY_READ_ONLY_DEMO", True), TestClient(app) as client:
             self.assertEqual(client.post("/api/setpoints/load_setpoint", json={"value": 400}).status_code, 403)
             self.assertEqual(client.post("/api/trip/reset").status_code, 403)
             self.assertEqual(client.post("/api/mode/shutdown").status_code, 403)
