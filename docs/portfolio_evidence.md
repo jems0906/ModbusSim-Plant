@@ -2,6 +2,8 @@
 
 ## Screenshots
 
+The public [ModbusSim Plant demo](https://modbussim-plant-production.up.railway.app/) and [AlarmaWatch console](https://modbussim-plant-production.up.railway.app/alarmwatch/) run in read-only mode. The Modbus TCP listener is not publicly exposed.
+
 ![ModbusSim Plant operating overview, with 360.0 MW load and 50.1% drum level](screenshots/modbussim-overview.png)
 
 ![AlarmaWatch Modbus audit filter showing FC06 at holding register 40005](screenshots/alarmawatch-modbus-audit.png)

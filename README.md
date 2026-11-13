@@ -4,6 +4,8 @@ A local combined-cycle **training simulator**, with a pymodbus TCP server, JSON 
 
 The companion [AlarmaWatch project](docs/alarmwatch.md) polls mapped values using Modbus read functions only, provides alarm acknowledgment and source-health monitoring, and surfaces the simulator-only security observations defined in [its scope](docs/alarmwatch_security_spec.md).
 
+**Hosted read-only demo:** [ModbusSim Plant](https://modbussim-plant-production.up.railway.app/) · [AlarmaWatch](https://modbussim-plant-production.up.railway.app/alarmwatch/). Hosted controls and alarm acknowledgments are disabled; Modbus TCP is private to the container.
+
 For a complete alarm trigger, acknowledgment, and return-to-normal walkthrough, see the [portfolio demo runbook](docs/portfolio_demo.md).
 
 See the [portfolio evidence page](docs/portfolio_evidence.md) for screenshots, clean-install results, and test evidence.
